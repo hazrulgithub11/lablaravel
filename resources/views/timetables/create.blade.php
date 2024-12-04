@@ -24,37 +24,70 @@
 
     <form action="{{ route('timetables.store') }}" method="POST">
         @csrf
+
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Day:</strong>
-                    <input type="text" name="day" class="form-control" placeholder="Day">
+                    <select class="form-control" name="day_id" required>
+                        <option value="">Select Day</option>
+                        @foreach($days as $day)
+                            <option value="{{ $day->id }}">{{ $day->day_name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Subject:</strong>
-                    <input type="text" name="subject" class="form-control" placeholder="Subject">
+                    <select class="form-control" name="subject_id" required>
+                        <option value="">Select Subject</option>
+                        @foreach($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject->subject_code }} - {{ $subject->subject_name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Hall:</strong>
-                    <input type="text" name="hall" class="form-control" placeholder="Hall">
+                    <select class="form-control" name="hall_id" required>
+                        <option value="">Select Hall</option>
+                        @foreach($halls as $hall)
+                            <option value="{{ $hall->id }}">{{ $hall->lecture_hall_name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Group:</strong>
+                    <select class="form-control" name="group_id" required>
+                        <option value="">Select Group</option>
+                        @foreach($groups as $group)
+                            <option value="{{ $group->id }}">{{ $group->group_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Time From:</strong>
-                    <input type="time" name="time_from" class="form-control">
+                    <input type="time" name="time_from" class="form-control" required>
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Time To:</strong>
-                    <input type="time" name="time_to" class="form-control">
+                    <input type="time" name="time_to" class="form-control" required>
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

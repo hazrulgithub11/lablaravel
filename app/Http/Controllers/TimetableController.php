@@ -25,11 +25,12 @@ class TimetableController extends Controller
      */
     public function create()
     {
-        $days = Day::pluck('day_name', 'id');
-        $halls = Hall::pluck('lecture_hall_name', 'id');
-        $subjects = Subject::pluck('subject_name', 'id');
+        $subjects = Subject::all();
+        $days = Day::all();
+        $halls = Hall::all();
+        $groups = Group::all();
 
-        return view('timetables.create', compact('days', 'subjects', 'halls'));
+        return view('timetables.create', compact('subjects', 'days', 'halls', 'groups'));
     }
 
     /**
@@ -62,11 +63,12 @@ class TimetableController extends Controller
      */
     public function edit(Timetable $timetable)
     {
-        $days = Day::pluck('day_name', 'id');
-        $halls = Hall::pluck('lecture_hall_name', 'id');
-        $subjects = Subject::pluck('subject_name', 'id');
+        $subjects = Subject::all();
+        $days = Day::all();
+        $halls = Hall::all();
+        $groups = Group::all();
 
-        return view('timetables.edit', compact('days', 'subjects', 'halls', 'timetable'));
+        return view('timetables.edit', compact('timetable', 'subjects', 'days', 'halls', 'groups'));
     }
 
     /**
