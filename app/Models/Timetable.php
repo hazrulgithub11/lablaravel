@@ -32,4 +32,9 @@ class Timetable extends Model
     public function day(){
         return $this->belongsTo(Day::class);
     }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

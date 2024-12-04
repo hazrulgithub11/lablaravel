@@ -25,11 +25,12 @@ class TimetableController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::all();
-        $days = Day::all();
-        $halls = Hall::all();
-        $groups = Group::all();
-
+        // Get all options for dropdowns
+        $subjects = Subject::orderBy('subject_name')->get();
+        $days = Day::orderBy('day_name')->get();
+        $halls = Hall::orderBy('lecture_hall_name')->get();
+        $groups = Group::orderBy('name')->get();  // Changed from 'group_name' to 'name'
+    
         return view('timetables.create', compact('subjects', 'days', 'halls', 'groups'));
     }
 
@@ -37,18 +38,23 @@ class TimetableController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        Timetable::create([
-            'user_id' => auth()->user()->id,
-            'day_id' => $request->day_id,
-            'subject_id' => $request->subject_id,
-            'hall_id' => $request->hall_id,
-            'time_from' => $request->time_from,
-            'time_to' => $request->time_to,
-        ]);
+{
+    // Validate the request
+    $request->validate([
+        'subject_id' => 'required',
+        'day_id' => 'required',
+        'hall_id' => 'required',
+        'group_id' => 'required',
+        'time_from' => 'required',
+        'time_to' => 'required',
+    ]);
 
-        return redirect()->route('timetables.index')->with('success', 'Timetable created successfully.');
-    }
+    // Create the timetable entry
+    Timetable::create($request->all());
+
+    return redirect()->route('timetables.index')
+        ->with('success', 'Timetable created successfully.');
+}
 
     /**
      * Display the specified resource.
@@ -63,11 +69,11 @@ class TimetableController extends Controller
      */
     public function edit(Timetable $timetable)
     {
-        $subjects = Subject::all();
-        $days = Day::all();
-        $halls = Hall::all();
-        $groups = Group::all();
-
+        $subjects = Subject::orderBy('subject_name')->get();
+        $days = Day::orderBy('day_name')->get();
+        $halls = Hall::orderBy('lecture_hall_name')->get();
+        $groups = Group::orderBy('name')->get();  // Changed from 'group_name' to 'name'
+    
         return view('timetables.edit', compact('timetable', 'subjects', 'days', 'halls', 'groups'));
     }
 

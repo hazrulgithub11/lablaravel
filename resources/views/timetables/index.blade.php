@@ -25,6 +25,7 @@
             <th>Hall</th>
             <th>Time From</th>
             <th>Time To</th>
+            <th>Group</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($timetables as $t)
@@ -35,6 +36,7 @@
             <td>{{ $t->hall ? $t->hall->lecture_hall_name : 'No Hall Assigned' }}</td>
             <td>{{ $t->time_from }}</td>
             <td>{{ $t->time_to }}</td>
+            <td>{{ $t->group ? $t->group->name : 'No Group Assigned' }}</td>
             <td>
                 <form action="{{ route('timetables.destroy', $t->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('timetables.show', $t->id) }}">Show</a>

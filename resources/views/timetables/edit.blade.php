@@ -70,9 +70,10 @@
                     <strong>Group:</strong>
                     <select class="form-control" name="group_id" required>
                         <option value="">Select Group</option>
+                        <!-- In the groups dropdown -->
                         @foreach($groups as $group)
                             <option value="{{ $group->id }}" {{ $timetable->group_id == $group->id ? 'selected' : '' }}>
-                                {{ $group->group_name }}
+                                {{ $group->name }}  <!-- Changed from group_name to name -->
                             </option>
                         @endforeach
                     </select>
