@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/students/{student}/edit', [App\Http\Controllers\StudentController::class, 'edit'])->name('students.edit');
     Route::put('/students/{student}', [App\Http\Controllers\StudentController::class, 'update'])->name('students.update');
     Route::delete('/students/{student}', [App\Http\Controllers\StudentController::class, 'destroy'])->name('students.destroy');
+    Route::resource('timetables', App\Http\Controllers\TimetableController::class);
 });
   
 require __DIR__.'/auth.php';
