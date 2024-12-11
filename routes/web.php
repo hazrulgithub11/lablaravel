@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,20 @@ Route::middleware('auth')->group(function () {
     Route::put('/students/{student}', [App\Http\Controllers\StudentController::class, 'update'])->name('students.update');
     Route::delete('/students/{student}', [App\Http\Controllers\StudentController::class, 'destroy'])->name('students.destroy');
     Route::resource('timetables', App\Http\Controllers\TimetableController::class);
+
+     // Timetable routes
+     Route::resource('timetables', App\Http\Controllers\TimetableController::class);
+
+     // Subject routes
+     Route::resource('subjects', App\Http\Controllers\SubjectController::class);
+ 
+     // Hall routes
+     Route::resource('halls', App\Http\Controllers\HallController::class);
+ 
+     // Day routes
+     Route::resource('days', App\Http\Controllers\DayController::class);
+
+     Route::resource('groups', App\Http\Controllers\GroupController::class);
 });
   
 require __DIR__.'/auth.php';

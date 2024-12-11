@@ -31,6 +31,12 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group">
+                    <strong>Age:</strong>
+                    <input type="number" name="age" value="{{ $student->age }}" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
                     <strong>Email:</strong>
                     <input type="email" name="email" value="{{ $student->email }}" class="form-control">
                 </div>

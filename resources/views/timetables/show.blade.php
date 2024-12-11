@@ -15,19 +15,19 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Day:</strong>
-                {{ $timetable->day }}
+                {{ $timetable->day->day_name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Subject:</strong>
-                {{ $timetable->subject }}
+                {{ $timetable->subject->subject_name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Hall:</strong>
-                {{ $timetable->hall }}
+                {{ $timetable->hall->lecture_hall_name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

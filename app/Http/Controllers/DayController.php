@@ -12,7 +12,8 @@ class DayController extends Controller
      */
     public function index()
     {
-        //
+        $days = Day::all();
+        return view('days.index', compact('days'));
     }
 
     /**
@@ -20,7 +21,7 @@ class DayController extends Controller
      */
     public function create()
     {
-        //
+        return view('days.create');
     }
 
     /**
@@ -28,7 +29,14 @@ class DayController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'day_name' => 'required|unique:days',
+        ]);
+
+        Day::create($request->all());
+
+        return redirect()->route('days.index')
+                         ->with('success', 'Day created successfully.');
     }
 
     /**
@@ -36,7 +44,7 @@ class DayController extends Controller
      */
     public function show(Day $day)
     {
-        //
+        return view('days.show', compact('day'));
     }
 
     /**
@@ -44,7 +52,7 @@ class DayController extends Controller
      */
     public function edit(Day $day)
     {
-        //
+        return view('days.edit', compact('day'));
     }
 
     /**
@@ -52,7 +60,14 @@ class DayController extends Controller
      */
     public function update(Request $request, Day $day)
     {
-        //
+        $request->validate([
+            'day_name' => 'required|unique:days,day_name,' . $day->id,
+        ]);
+
+        $day->update($request->all());
+
+        return redirect()->route('days.index')
+                         ->with('success', 'Day updated successfully.');
     }
 
     /**
@@ -60,6 +75,9 @@ class DayController extends Controller
      */
     public function destroy(Day $day)
     {
-        //
+        $day->delete();
+
+        return redirect()->route('days.index')
+                         ->with('success', 'Day deleted successfully.');
     }
 }

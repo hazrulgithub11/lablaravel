@@ -1,0 +1,11 @@
+body {
+    background-color: #f4f6f9;
+}
+
+/* OR for image */
+body {
+    background-image: url('../img/white.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

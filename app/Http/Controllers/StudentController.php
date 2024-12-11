@@ -9,28 +9,30 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = User::all(); // Replace `Student` with your actual model if different
+        $students = User::all();
         return view('students.index', compact('students'));
     }
 
-        public function create()
+    public function create()
     {
         return view('students.create');
     }
 
-        public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required'
+            'password' => 'required',
+            'age' => 'nullable|numeric'
         ]);
 
         try {
-            DB::table('users')->insert([
+            User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
+                'age' => $request->age
             ]);
 
             return redirect()->route('students.index')
@@ -39,17 +41,17 @@ class StudentController extends Controller
         catch (\Exception $e) {
             return redirect()->back()
                             ->withInput()
-                            ->with('error', 'Email address already exists. Please use a different email.');
+                            ->with('error', 'Error creating student. Please try again.');
         }
     }
 
-        public function show($id)
+    public function show($id)
     {
         $student = User::findOrFail($id);
         return view('students.show', compact('student'));
     }
 
-        public function edit($id)
+    public function edit($id)
     {
         $student = User::findOrFail($id);
         return view('students.edit', compact('student'));
@@ -60,15 +62,22 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'required',
+            'age' => 'nullable|numeric'
         ]);
 
         try {
             $student = User::findOrFail($id);
-            $student->update([
+            $updateData = [
                 'name' => $request->name,
                 'email' => $request->email,
-            ]);
+                'age' => $request->age
+            ];
+
+            if ($request->filled('password')) {
+                $updateData['password'] = bcrypt($request->password);
+            }
+
+            $student->update($updateData);
 
             return redirect()->route('students.index')
                             ->with('success', 'Student updated successfully');
@@ -92,7 +101,4 @@ class StudentController extends Controller
                             ->with('error', 'Error deleting student. Please try again.');
         }
     }
-
-
-
 }

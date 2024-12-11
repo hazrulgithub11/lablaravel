@@ -17,6 +17,12 @@
         </div>
         <div class="col-md-12">
             <div class="form-group">
+                <strong>Age:</strong>
+                {{ $student->age }}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
                 <strong>Email:</strong>
                 {{ $student->email }}
             </div>

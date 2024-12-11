@@ -36,6 +36,12 @@
         </div>
         <div class="col-md-12">
             <div class="form-group">
+                <strong>Age:</strong>
+                <input type="number" class="form-control" name="age" placeholder="Age">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
                 <strong>Email:</strong>
                 <input type="text" class="form-control" name="email" placeholder="Email">
             </div>

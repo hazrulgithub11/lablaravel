@@ -19,12 +19,34 @@
   <link rel="stylesheet" href="{{ asset('admin/plugins/jqvmap/jqvmap.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/dist/css/custom.css') }}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
+
+  <style>
+    body {
+        background-color: #f4f6f9; /* Light gray fallback */
+        background-image: url("{{ asset('admin/dist/img/white.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Keeps background fixed while scrolling */
+        min-height: 100vh; /* Ensures background covers full viewport height */
+    }
+    
+    /* Override AdminLTE default background */
+    .content-wrapper {
+        background: transparent !important;
+    }
+    
+    .main-sidebar {
+        background-color: rgba(52, 58, 64, 0.9) !important; /* Semi-transparent sidebar */
+    }
+</style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -168,6 +190,8 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+
+      
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -230,6 +254,43 @@
                   <p>Timetable</p>
                 </a>
               </li>
+              <li class="nav-item">
+                  <a href="{{ route('subjects.index') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Subjects</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="{{ route('halls.index') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Halls</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="{{ route('days.index') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Days</p>
+                  </a>
+              </li>
+               <li class="nav-item">
+                <a href="{{ route('groups.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Groups</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt nav-icon"></i>
+                    <p>{{ __('Logout') }}</p>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </li>
             </ul>
           </li>
 
@@ -277,7 +338,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2024 <a href="https://next-portfolio-khaki-beta.vercel.app/">HarizHakim.io</a>.</strong>
+    <strong>Copyright &copy; 2024 <a href="https://next-portfolio-khaki-beta.vercel.app/">Hazrul Fahmi</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.1.0
@@ -326,5 +387,7 @@
 <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo -->
 <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>
+<!-- Include your JS scripts here -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
